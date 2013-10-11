@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import sys
-
+from iter_gen import Gospers_Hack
 print 'Hello, let\'s start.'
 f = open('tsp.txt')
 n = int(f.readline().split()[0])
@@ -41,15 +41,23 @@ print 'Base case...'
 # SSi = {}
 # for i in range(len(SS)):
 #     SSi[SS[i]] = i
-nS = pow(2,n-1) 
+nSS = pow(2,n-1) #用一个25bit的整形数S代表各顶点的子集合S，所以子集合构成的集合SS的元素数为2^(n-1)
 A = [[float("+inf") for j in range(n) ] for i in range(n)]
 A[0][0] = 0.0
 B = [[]]
-# print 'Recurrence...'
-# for m in range(2,n+1):
-#     for S in some set:
-# 	for i in range(1,n):
-# 	    A[S][i] = min k-0-i { A[S-set([k])][k] + C[k][i] }
-# print 'Solution to the original problem...'
-# minV = min j_1->n-1 { A[set(range(n))][j] + C[j][0] }
-# print 'minimum cost of travelling tour is', minV
+print 'Recurrence...'
+for m in range(2,n+1):
+    B = []
+    for S in Gospers_Hack(m):
+	for i in range(1,n):
+	    minV = float("+inf")
+	    for k in range(1,n):
+		if S&(1<<(k-1)) != 0 and k != i: # 遍历S去掉某个顶点的子集
+	            S_ = S ^ (1<<(k-1))
+		    minV =  min( minV, A[S_][k]+C[k][i] )
+	    B[S][i] = minV
+    A = B
+print 'Solution to the original problem...'
+S = pow(2,n-1) - 1
+minV = min j=1->n-1 { A[S][j] + C[j][0] }
+print 'minimum cost of travelling tour is', minV
