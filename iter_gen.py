@@ -17,11 +17,38 @@ class Gospers_Hack:
         x = r | (((x ^ r) >> 2) // s) # 将(k-1)个连续1放到尾部
 	self.x = x
 	return xr
-# gh = Gospers_Hack(2)
+def combi(n,k):
+    if n < k:
+	return 0
+    else :
+        denominator = 1
+	numerator = 1
+	for i in range(1,k+1):
+	    denominator *= i
+	    numerator *= (n-i+1)
+	return numerator/denominator
+def Cindex(x,k,m):
+    C = [0 for i in range(k+1)]
+    count = 1
+    for i in range(m):
+	if  (x >> i) & 1  :
+	    C[count] = i
+	    count += 1
+    index = 0
+    for i in range(1,k+1):
+	index += combi(C[i],i)
+    return index
+
+# # test    
+# gh = Gospers_Hack(2-1,24)
 # print 'first:',gh.first
 # print 'last:',gh.last
-# for S in Gospers_Hack(2):
-#     print S
+# count = 0
+# for S in Gospers_Hack(2-1,24):
+#     print count,":",S,
+#     print "Cindex:",Cindex(S,1,24)
+#     count += 1
+
 	
 
 
