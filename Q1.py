@@ -36,6 +36,7 @@ print 'Recurrence...'
 # 第一层遍历子集的长度，从2到n
 for m in range(2,n+1):
     # 第二层遍历m长度所有的子集，从0B0..01..1(m个1,25-m个0)到(0B1..10..0)
+    print 'm:',m
     B = [[] for i in range(combi(24,m-1))]
     for S in Gospers_Hack(m-1,24):
 	B[Cindex(S,m-1,24)] = [0.0 for i in range(n)]
