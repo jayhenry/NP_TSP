@@ -1,7 +1,8 @@
 # -*- coding:utf-8 -*-
 class Gospers_Hack:
     def __init__(self, m, n ):
-	self.m = m # 比特数
+	# n: 总比特数
+	self.m = m # 有效比特数
 	self.first = pow(2, m ) - 1
 	self.last = pow(2, n ) - pow(2, n-m )
     def __iter__(self):
