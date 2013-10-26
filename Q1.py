@@ -1,7 +1,9 @@
 # -*- coding:utf-8 -*-
 import sys
-from iter_gen import Gospers_Hack, Cindex,combi
+import datetime
+from iter_gen import Gospers_Hack # , Cindex,combi
 
+start_time = datetime.datetime.now()
 print 'Hello, let\'s start.'
 f = open('test1.txt')
 n = int(f.readline().split()[0])
@@ -36,9 +38,9 @@ for m in range(2,n+1):
 	        if m > 2:
 	            minV = float("+inf")
 	            for k in range(1,n):
-	        	    if S&(1<<(k-1)) != 0 and k != i: # 遍历S去掉某个顶点的子集
-	                        S_ = S ^ (1<<(i-1))
-	        	        minV =  min( minV, B[S_][k]+C[k][i] )
+	        	if S&(1<<(k-1)) != 0 and k != i: # 遍历S去掉某个顶点的子集
+	                    S_ = S ^ (1<<(i-1))
+	        	    minV =  min( minV, B[S_][k]+C[k][i] )
 	        else :
 	            minV = C[0][i]
 	        B[S][i] = minV
@@ -49,4 +51,5 @@ minV = float("+inf")
 for j in range(1,n):
     minV = min(minV, B[S][j]+C[j][0])
 print 'minimum cost of travelling tour is', minV
+print 'time consumed:',datetime.datetime.now() - start_time
 
